@@ -1,16 +1,42 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { AntdRegistry } from '@ant-design/nextjs-registry';
+import { ConfigProvider } from 'antd';
+import AppHeader from '@/components/AppHeader'
+import faIR from 'antd/locale/fa_IR'
+import type { ThemeConfig } from 'antd';
+import localFont from 'next/font/local'
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+const vazirmatn = localFont({
+  src: [
+    {
+      path: '../public/fonts/Vazirmatn-UI-FD-Regular.woff2',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../public/fonts/Vazirmatn-UI-FD-Bold.woff2',
+      weight: '700',
+      style: 'normal',
+    },
+  ],
+  variable: '--font-vazirmatn'
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const config: ThemeConfig = {
+  token: {
+    fontFamily: 'Vazirmatn'
+  },
+  components: {
+    Layout: {
+      bodyBg: '#f0f2f5',
+      headerBg: '#f0f2f5',
+    },
+    Menu: {
+      colorBgContainer: '#f0f2f5',
+    }
+  }
+};
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -23,9 +49,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        {children}
+    <html lang="fa-IR" dir="rtl" className={vazirmatn.className}>
+      <body>
+        <AntdRegistry>
+          <ConfigProvider
+            locale={faIR}
+            direction="rtl"
+            theme={config}
+          >
+            <AppHeader />
+            {children}
+          </ConfigProvider>
+        </AntdRegistry>
       </body>
     </html>
   );

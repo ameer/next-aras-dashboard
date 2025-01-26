@@ -58,7 +58,9 @@ export default function RootLayout({
             theme={config}
           >
             <AppHeader />
-            {children}
+            <div className="container mx-auto">
+              {children}
+            </div>
           </ConfigProvider>
         </AntdRegistry>
       </body>

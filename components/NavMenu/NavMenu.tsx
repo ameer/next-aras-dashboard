@@ -19,6 +19,6 @@ const items: MenuItem[] = links.map((link) => ({
   label: <Link className={'font-bold'} href={link.href}>{link.label}</Link>,
 }));
 const NavMenu:React.FC = () => (
-  <Menu theme={'light'} mode="horizontal" items={items} />
+  <Menu theme={'light'} mode="horizontal" style={{ borderBottom: 'none' }} items={items} />
 )
 export default NavMenu

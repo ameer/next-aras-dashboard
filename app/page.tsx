@@ -1,6 +1,6 @@
 'use client'
 import useFetchData from '../hooks/useFetchData';
-import { Table } from 'antd';
+import { Table, Col, Row, Card } from 'antd';
 import type { TableProps } from 'antd';
 import { formatNumber } from '../utils'
 
@@ -42,27 +42,34 @@ const columns: TableProps<DataType>['columns'] = [
     key: 'symbol',
   },
   { title: 'وضعیت', dataIndex: 'status', },
-  { title: 'آخرین', dataIndex: 'last',  },
-  { title: 'پایانی', dataIndex: 'close', },
-  { title: 'ارزش بازار', dataIndex: 'market_value', render: (value: number) => formatNumber(value) },
-  { title: 'ارزش معاملات', dataIndex: 'trade_value', render: (value: number) => formatNumber(value) },
-  { title: '(%) روزانه', dataIndex: 'daily_change', render: (value: number) => formatNumber(value) },
-  { title: '(%) هفتگی', dataIndex: 'weekly_change', render: (value: number) => formatNumber(value) },
-  { title: '(%) ماهانه', dataIndex: 'monthly_change', render: (value: number) => formatNumber(value) },
-  { title: '(%) سالانه', dataIndex: 'yearly_change', render: (value: number) => formatNumber(value) },
+  { title: 'آخرین', dataIndex: 'last', render: formatNumber  },
+  { title: 'پایانی', dataIndex: 'close', render: formatNumber },
+  { title: 'ارزش بازار', dataIndex: 'market_value', render: formatNumber },
+  { title: 'ارزش معاملات', dataIndex: 'trade_value', render: formatNumber },
+  { title: '(%) روزانه', dataIndex: 'daily_change', render: formatNumber },
+  { title: '(%) هفتگی', dataIndex: 'weekly_change', render: formatNumber },
+  { title: '(%) ماهانه', dataIndex: 'monthly_change', render: formatNumber },
+  { title: '(%) سالانه', dataIndex: 'yearly_change', render: formatNumber },
   { title: '', dataIndex: 'actions' }
 
 ];
-
 export default function Home() {
   const { data, error } = useFetchData<DataType[]>('v2/market_table?dashboard_name=ghadir');
 
   if (error) return <p>Error loading data: {error.message}</p>;
   if (!data) return <p>Loading...</p>;
+  const firstRowKey = data![0].ins_code
 
   return (
-    <div>
-      <Table<DataType> columns={columns} dataSource={data} rowKey="ins_code" />
-    </div>
+    <>
+      <Row>
+        <Col span="18">
+          <Card bordered={false}>
+            <Table<DataType> columns={columns} dataSource={data} rowKey="ins_code" pagination={{ position: ['none'] }} expandable={{ expandedRowKeys: [firstRowKey] }} />
+          </Card>
+        </Col>
+      </Row>
+
+    </>
   )
 }

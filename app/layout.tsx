@@ -30,10 +30,10 @@ const config: ThemeConfig = {
   components: {
     Layout: {
       bodyBg: '#f0f2f5',
-      headerBg: '#f0f2f5',
+      headerBg: '#f9f9f9',
     },
     Menu: {
-      colorBgContainer: '#f0f2f5',
+      colorBgContainer: '#f9f9f9',
     }
   }
 };
@@ -58,7 +58,7 @@ export default function RootLayout({
             theme={config}
           >
             <AppHeader />
-            <div className="container mx-auto">
+            <div className="container py-3 mx-auto">
               {children}
             </div>
           </ConfigProvider>

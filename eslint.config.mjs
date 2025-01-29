@@ -20,6 +20,14 @@ const eslintConfig = [
       }],
       "no-trailing-spaces": ["error"],
       "object-curly-spacing": ["error", "always"],
+      "@typescript-eslint/no-unused-vars": [
+        "warn", // or "error"
+        {
+          "argsIgnorePattern": "^_",
+          "varsIgnorePattern": "^_",
+          "caughtErrorsIgnorePattern": "^_"
+        }
+      ]
     }
   }),
 ];

@@ -21,7 +21,7 @@ const useFetchData = <T,>(endpoint: string): FetchDataResult<T> => {
         if(token){
           headers['Authorization'] = `Bearer ${token}`
         }
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}${endpoint}`, {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}${endpoint}?dashboard_name=${process.env.NEXT_PUBLIC_DASHBOARD_NAME}`, {
           headers
         });
 

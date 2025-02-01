@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 import { AntdRegistry } from '@ant-design/nextjs-registry';
-import { ConfigProvider } from 'antd';
+import AntdConfigProvider from '@/components/ConfigProvider';
 import AppHeader from '@/components/AppHeader'
-import faIR from 'antd/locale/fa_IR'
-import type { ThemeConfig } from 'antd';
 import localFont from 'next/font/local'
 import "./globals.css";
+import Indexes from "@/components/Indexes/Indexes";
 
 const bodyFont = localFont({
   src: [
@@ -58,23 +57,7 @@ const monospace = localFont({
   variable: '--font-mono'
 })
 
-const config: ThemeConfig = {
-  token: {
-    fontFamily: 'bodyFont',
-  },
-  components: {
-    Layout: {
-      bodyBg: '#f0f2f5',
-      headerBg: '#f9f9f9',
-    },
-    Menu: {
-      colorBgContainer: '#f9f9f9',
-    },
-    Table: {
-      cellPaddingBlock: 8
-    }
-  }
-};
+
 
 export const metadata: Metadata = {
   title: "داشبورد غدیر",
@@ -90,16 +73,13 @@ export default function RootLayout({
     <html lang="fa-IR" dir="rtl" className={bodyFont.className + ' ' + monospace.variable + ' ' + bodyFont.variable}>
       <body>
         <AntdRegistry>
-          <ConfigProvider
-            locale={faIR}
-            direction="rtl"
-            theme={config}
-          >
+          <AntdConfigProvider>
             <AppHeader />
+            <Indexes />
             <div className="container py-3 mx-auto">
               {children}
             </div>
-          </ConfigProvider>
+          </AntdConfigProvider>
         </AntdRegistry>
       </body>
     </html>

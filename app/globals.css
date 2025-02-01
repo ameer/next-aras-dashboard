@@ -52,6 +52,10 @@ a {
 .ant-table-row.no-children .ant-table-row-expand-icon {
   visibility: hidden !important;
 }
+.ant-menu-item {
+  display: flex !important;
+  align-items: center;
+}
 .mono:not(th) {
   font-family: var(--font-mono);
 }
@@ -69,4 +73,42 @@ a {
 }
 .table-border-collapse table {
   border-collapse: collapse !important;
+}
+.last-price__cell.up {
+  color: currentColor !important;
+  animation-name: highlightup;
+  animation-duration: 0.75s;
+}
+
+.last-price__cell.down {
+  color: currentColor !important;
+  animation-name: highlightdown;
+  animation-duration: 0.75s;
+}
+@keyframes highlightup {
+  0% {
+    background-color: #eee;
+  }
+
+  50% {
+    background-color: rgba(0, 128, 0, 0.3);
+  }
+
+  100% {
+    background-color: #eee;
+  }
+}
+
+@keyframes highlightdown {
+  0% {
+    background-color: #eee;
+  }
+
+  50% {
+    background-color: rgb(255, 0, 0, 0.3);
+  }
+
+  100% {
+    background-color: #eee;
+  }
 }
